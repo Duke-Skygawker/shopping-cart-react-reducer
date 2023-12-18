@@ -1,6 +1,6 @@
 // components
-import Navbar from './Navbar';
-import CartContainer from './CartContainer';
+import Navbar from "./Components/Navbar";
+import CartContainer from "./Components/CartContainer";
 
 function App() {
   return (
