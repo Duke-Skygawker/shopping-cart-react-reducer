@@ -7,6 +7,7 @@ const CartItem = ({
   amount,
   removeItem,
   increaseAmount,
+  decreaseAmount,
 }) => {
   return (
     <article className="cart-item">
@@ -27,7 +28,7 @@ const CartItem = ({
         {/* amount */}
         <span className="amount">{amount}</span>
         {/* decrease amount */}
-        <button className="amount-btn" onClick={() => console.log("decrease")}>
+        <button className="amount-btn" onClick={() => decreaseAmount(id)}>
           <FaChevronDown className="amount-icon" />
         </button>
       </div>

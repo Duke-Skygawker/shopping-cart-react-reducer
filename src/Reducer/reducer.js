@@ -30,7 +30,7 @@ const reducer = (state, action) => {
     const newCart = state.cart.map((item) => {
       if (item.id === action.payload.id) {
         // increase the amount in the item object
-        const newItem = { ...item, amount: amount - 1 };
+        const newItem = { ...item, amount: item.amount - 1 };
         return newItem;
       }
       return item;

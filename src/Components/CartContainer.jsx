@@ -28,6 +28,9 @@ const CartContainer = () => {
   const increaseAmount = (id) => {
     dispatch({ type: INCREASE_AMOUNT, payload: { id: id } });
   };
+  const decreaseAmount = (id) => {
+    dispatch({ type: DECREASE_AMOUNT, payload: { id: id } });
+  };
   if (state.cart.length === 0) {
     return (
       <section className="cart">
@@ -54,6 +57,7 @@ const CartContainer = () => {
               {...cartItem}
               removeItem={removeItem}
               increaseAmount={increaseAmount}
+              decreaseAmount={decreaseAmount}
             />
           );
         })}
