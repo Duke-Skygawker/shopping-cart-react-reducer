@@ -10,11 +10,12 @@ import {
 } from "../Reducer/actions";
 
 const CartContainer = () => {
-  const { total, setTotal, defaultState, updatePriceTotal, cartAmountUpdate } =
+  const { defaultState, updatePriceTotal, cartAmountUpdate } =
     useGlobalContext();
   const [state, dispatch] = useReducer(reducer, defaultState);
 
   useEffect(() => {
+    // update total on state change, only amount changes in the state, based on it's change, trigger useffect and update globalcontext states
     updatePriceTotal(state);
     cartAmountUpdate(state);
   }, [state]);
