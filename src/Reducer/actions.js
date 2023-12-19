@@ -1,3 +1,4 @@
-export const CLEAR_LIST = "CLEAR_LIST";
-export const RESTE_LIST = "RESTE_LIST";
+export const CLEAR_CART = "CLEAR_CART";
 export const REMOVE_ITEM = "REMOVE_ITEM";
+export const INCREASE_AMOUNT = "INCREASE_AMOUNT";
+export const DECREASE_AMOUNT = "DECREASE_AMOUNT";
