@@ -20,9 +20,9 @@ const AppContext = ({ children }) => {
   const updatePriceTotal = (state) => {
     let newTotal = 0;
     const defaultTotal = state.cart.map((item) => {
-      return (newTotal += Number(item.price));
+      return (newTotal += Number(item.price) * item.amount);
     });
-    setTotal(newTotal);
+    setTotal(newTotal.toFixed(2));
   };
 
   const cartAmountUpdate = (state) => {
