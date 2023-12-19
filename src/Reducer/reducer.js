@@ -19,12 +19,10 @@ const reducer = (state, action) => {
       if (item.id === action.payload.id) {
         // increase the amount in the item object
         const newItem = { ...item, amount: item.amount + 1 };
-        console.log(newItem);
         return newItem;
       }
       return item;
     });
-    console.log(newCart);
     return { ...state, cart: newCart };
   }
   if (action.type === DECREASE_AMOUNT) {

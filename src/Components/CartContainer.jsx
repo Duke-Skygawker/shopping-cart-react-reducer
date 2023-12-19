@@ -1,8 +1,7 @@
 import CartItem from "./CartItem";
-
 import { useEffect, useReducer } from "react";
 import { useGlobalContext } from "../Context/Context";
-import reducer from "../Reducer/Reducer";
+import reducer from "../Reducer/reducer";
 import {
   CLEAR_CART,
   REMOVE_ITEM,
@@ -18,7 +17,7 @@ const CartContainer = () => {
   useEffect(() => {
     updatePriceTotal(state);
     cartAmountUpdate(state);
-  }, []);
+  }, [state]);
 
   const clearCart = () => {
     dispatch({ type: CLEAR_CART });
