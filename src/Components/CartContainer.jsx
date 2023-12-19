@@ -1,9 +1,35 @@
 import CartItem from "./CartItem";
-import cartItems from "../data";
-const CartContainer = () => {
-  const cartArray = [...cartItems];
 
-  if (cartArray.length === 0) {
+import { useEffect, useReducer } from "react";
+import { useGlobalContext } from "../Context/Context";
+import reducer from "../Reducer/Reducer";
+import {
+  CLEAR_CART,
+  REMOVE_ITEM,
+  INCREASE_AMOUNT,
+  DECREASE_AMOUNT,
+} from "../Reducer/actions";
+
+const CartContainer = () => {
+  const { total, setTotal, defaultState, updatePriceTotal, cartAmountUpdate } =
+    useGlobalContext();
+  const [state, dispatch] = useReducer(reducer, defaultState);
+
+  useEffect(() => {
+    updatePriceTotal(state);
+    cartAmountUpdate(state);
+  }, []);
+
+  const clearCart = () => {
+    dispatch({ type: CLEAR_CART });
+  };
+  const removeItem = (id) => {
+    dispatch({ type: REMOVE_ITEM, payload: { id: id } });
+  };
+  const increaseAmount = (id) => {
+    dispatch({ type: INCREASE_AMOUNT, payload: { id: id } });
+  };
+  if (state.cart.length === 0) {
     return (
       <section className="cart">
         {/* cart header */}
@@ -22,8 +48,15 @@ const CartContainer = () => {
       </header>
       {/* cart items */}
       <div>
-        {cartArray.map((cartItem) => {
-          return <CartItem key={cartItem.id} {...cartItem} />;
+        {state.cart.map((cartItem) => {
+          return (
+            <CartItem
+              key={cartItem.id}
+              {...cartItem}
+              removeItem={removeItem}
+              increaseAmount={increaseAmount}
+            />
+          );
         })}
       </div>
       {/* cart footer */}
@@ -31,13 +64,10 @@ const CartContainer = () => {
         <hr />
         <div>
           <h5 className="cart-total">
-            total <span>$10</span>
+            total <span>${defaultState.total}</span>
           </h5>
         </div>
-        <button
-          className="btn btn-hipster"
-          onClick={() => console.log("clear cart")}
-        >
+        <button className="btn btn-hipster" onClick={clearCart}>
           clear cart
         </button>
       </footer>

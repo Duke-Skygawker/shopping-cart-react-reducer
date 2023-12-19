@@ -10,26 +10,27 @@ const reducer = (state, action) => {
     return { ...state, cart: [] };
   }
   if (action.type === REMOVE_ITEM) {
-    const newCart = cart.filter((item) => item.id !== action.type.id);
+    const newCart = state.cart.filter((item) => item.id !== action.payload.id);
     return { ...state, cart: newCart };
   }
   if (action.type === INCREASE_AMOUNT) {
     // grab the item by the id from the cart
-    const newCart = cart.map((item) => {
-      if (item.id === action.type.id) {
+    const newCart = state.cart.map((item) => {
+      if (item.id === action.payload.id) {
         // increase the amount in the item object
-        const newItem = { ...item, amount: amount + 1 };
+        const newItem = { ...item, amount: item.amount + 1 };
+        console.log(newItem);
         return newItem;
       }
       return item;
     });
-
+    console.log(newCart);
     return { ...state, cart: newCart };
   }
   if (action.type === DECREASE_AMOUNT) {
     // grab the item by the id from the cart
-    const newCart = cart.map((item) => {
-      if (item.id === action.type.id) {
+    const newCart = state.cart.map((item) => {
+      if (item.id === action.payload.id) {
         // increase the amount in the item object
         const newItem = { ...item, amount: amount - 1 };
         return newItem;
