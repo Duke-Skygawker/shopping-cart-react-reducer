@@ -38,6 +38,16 @@ const AppContext = ({ children }) => {
   const decreaseAmount = (id) => {
     dispatch({ type: DECREASE_AMOUNT, payload: { id: id } });
   };
+
+  useEffect(() => {
+    dispatch({ type: LOADING });
+    const fetchData = async () => {
+      const response = await fetch(url);
+      const cart = await response.json();
+      dispatch({ type: DISPLAY_ITEMS, payload: { cart } });
+    };
+    fetchData();
+  }, []);
   return (
     <GlobalContext.Provider
       value={{

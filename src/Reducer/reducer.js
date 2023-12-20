@@ -41,6 +41,13 @@ const reducer = (state, action) => {
     const filteredCart = newCart.filter((item) => item.amount !== 0);
     return { ...state, cart: filteredCart };
   }
+  if (action.type === LOADING) {
+    return { ...state, loading: true };
+  }
+  if (action.type === DISPLAY_ITEMS) {
+    const newCart = action.payload.cart;
+    return { ...state, loading: false, cart: newCart };
+  }
   throw new Error(`No matching "${action.type}" - action type`);
 };
 
