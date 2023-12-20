@@ -1,22 +1,34 @@
-import { createContext, useContext, useState } from "react";
-import cartItems from "../data";
+import { useContext, useReducer, useEffect, createContext } from "react";
+import reducer from "./reducer";
+import cartItems from "./data";
+import { getTotals } from "./utils";
+import {
+  CLEAR_CART,
+  REMOVE,
+  INCREASE,
+  DECREASE,
+  LOADING,
+  DISPLAY_ITEMS,
+} from "./actions";
 const url = "https://www.course-api.com/react-useReducer-cart-project";
 
 export const GlobalContext = createContext();
 
 export const useGlobalContext = () => useContext(GlobalContext);
 
+const defaultState = {
+  cart: [],
+  isLoading: false,
+  amount: 1,
+  total: total,
+};
+
 const AppContext = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, defaultState);
+  const [cart, setCart] = useState([]);
   const [itemsInCart, setItemsInCart] = useState(null);
   const [total, setTotal] = useState(null);
   const cartArray = cartItems.map((item) => item);
-
-  const defaultState = {
-    cart: cartArray,
-    isLoading: false,
-    amount: cartArray.length,
-    total: total,
-  };
 
   const updatePriceTotal = (state) => {
     let newTotal = 0;
@@ -41,6 +53,8 @@ const AppContext = ({ children }) => {
         setTotal,
         itemsInCart,
         setItemsInCart,
+        cart,
+        setCart,
         defaultState,
         updatePriceTotal,
         cartAmountUpdate,

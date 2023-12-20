@@ -9,6 +9,9 @@ const reducer = (state, action) => {
   if (action.type === CLEAR_CART) {
     return { ...state, cart: [] };
   }
+  if (action.type === FETCH_CART) {
+    return { ...state, cart: action.payload.data };
+  }
   if (action.type === REMOVE_ITEM) {
     const newCart = state.cart.filter((item) => item.id !== action.payload.id);
     return { ...state, cart: newCart };

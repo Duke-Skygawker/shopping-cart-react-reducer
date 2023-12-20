@@ -17,10 +17,11 @@ const useFetch = (url) => {
         }
 
         const data = await resp.json();
+        console.log(data);
         setData(data);
       } catch (error) {
         setIsError(true);
-        // console.log(error);
+        console.log(error);
       }
       // hide loading
       setIsLoading(false);
