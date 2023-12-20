@@ -3,14 +3,13 @@ import {
   REMOVE_ITEM,
   INCREASE_AMOUNT,
   DECREASE_AMOUNT,
+  LOADING,
+  DISPLAY_ITEMS,
 } from "./actions";
 
 const reducer = (state, action) => {
   if (action.type === CLEAR_CART) {
     return { ...state, cart: [] };
-  }
-  if (action.type === FETCH_CART) {
-    return { ...state, cart: action.payload.data };
   }
   if (action.type === REMOVE_ITEM) {
     const newCart = state.cart.filter((item) => item.id !== action.payload.id);
@@ -42,7 +41,7 @@ const reducer = (state, action) => {
     const filteredCart = newCart.filter((item) => item.amount !== 0);
     return { ...state, cart: filteredCart };
   }
-  throw new Error(`No matching "$action.type" - action type`);
+  throw new Error(`No matching "${action.type}" - action type`);
 };
 
 export default reducer;

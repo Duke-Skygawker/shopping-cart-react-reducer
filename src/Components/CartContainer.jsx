@@ -1,18 +1,10 @@
 import CartItem from "./CartItem";
-import { useEffect, useReducer } from "react";
 import { useGlobalContext } from "../Context/Context";
 
 const CartContainer = () => {
-  const { state, defaultState, updatePriceTotal, cartAmountUpdate } =
-    useGlobalContext();
+  const { cart, total, clearCart } = useGlobalContext();
 
-  useEffect(() => {
-    // update total on state change, only amount changes in the state, based on it's change, trigger useffect and update globalcontext states
-    updatePriceTotal(state);
-    cartAmountUpdate(state);
-  }, [state]);
-
-  if (state.cart.length === 0) {
+  if (cart.length === 0) {
     return (
       <section className="cart">
         {/* cart header */}
@@ -31,16 +23,8 @@ const CartContainer = () => {
       </header>
       {/* cart items */}
       <div>
-        {state.cart.map((cartItem) => {
-          return (
-            <CartItem
-              key={cartItem.id}
-              {...cartItem}
-              removeItem={removeItem}
-              increaseAmount={increaseAmount}
-              decreaseAmount={decreaseAmount}
-            />
-          );
+        {cart.map((cartItem) => {
+          return <CartItem key={cartItem.id} {...cartItem} />;
         })}
       </div>
       {/* cart footer */}
@@ -48,7 +32,7 @@ const CartContainer = () => {
         <hr />
         <div>
           <h5 className="cart-total">
-            total <span>${defaultState.total}</span>
+            total <span>${total.toFixed(2)}</span>
           </h5>
         </div>
         <button className="btn btn-hipster" onClick={clearCart}>
